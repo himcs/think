@@ -1,7 +1,7 @@
 package io.himcs.sdk.action;
 
 import com.intellij.codeInsight.lookup.LookupElementBuilder;
-import com.intellij.database.model.DasNamed;
+import com.intellij.database.model.DasTable;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.project.Project;
@@ -13,7 +13,7 @@ public class ProjectAction extends AnAction {
 
     @Override
     public void actionPerformed(@NotNull AnActionEvent e) {
-        String tables = MDbUtil.getTables(e.getProject()).map(DasNamed::getName).map(LookupElementBuilder::create).toSet().toString();
+        String tables = MDbUtil.getTables(e.getProject()).map(DasTable::getName).map(LookupElementBuilder::create).toSet().toString();
         Messages.showInfoMessage(tables, "Tables");
     }
 

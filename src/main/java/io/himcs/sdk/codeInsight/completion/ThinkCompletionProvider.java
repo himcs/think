@@ -4,7 +4,7 @@ import com.intellij.codeInsight.completion.CompletionParameters;
 import com.intellij.codeInsight.completion.CompletionProvider;
 import com.intellij.codeInsight.completion.CompletionResultSet;
 import com.intellij.codeInsight.lookup.LookupElementBuilder;
-import com.intellij.database.model.DasNamed;
+import com.intellij.database.model.DasTable;
 import com.intellij.psi.PsiElement;
 import com.intellij.util.ProcessingContext;
 import io.himcs.sdk.util.MDbUtil;
@@ -12,7 +12,6 @@ import io.himcs.sdk.util.PhpElementsUtil;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
-import java.util.Set;
 
 public class ThinkCompletionProvider extends CompletionProvider {
     @Override
@@ -24,7 +23,7 @@ public class ThinkCompletionProvider extends CompletionProvider {
         if (isInM(psiElement)) {
             result.
                     addAllElements(MDbUtil.getTables(parameters.getPosition().getProject()).
-                            map(DasNamed::getName).
+                            map(DasTable::getName).
                             filter(s -> s.startsWith("tp_")).
                             map(s -> s.substring(3)).
                             map(LookupElementBuilder::create)

@@ -19,7 +19,6 @@ intellij {
     version = "${intellijVersion}"
     updateSinceUntilBuild false
     plugins = [
-
             "com.jetbrains.php:${phpPluginVersion}",
             'com.intellij.database',
             'java-i18n',

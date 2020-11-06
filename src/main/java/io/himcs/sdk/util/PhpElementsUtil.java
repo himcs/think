@@ -25,11 +25,12 @@ public class PhpElementsUtil {
             return Collections.emptyList();
         }
 
-        PhpTypeDeclaration typeDeclaration = PsiTreeUtil.getChildOfType(parameters[0], PhpTypeDeclaration.class);
-        if (typeDeclaration == null) return Collections.emptyList();
-        return typeDeclaration.getClassReferences().stream()
-                .map(PhpReference::getFQN)
-                .collect(Collectors.toList());
+//        PhpTypeDeclaration typeDeclaration = PsiTreeUtil.getChildOfType(parameters[0], PhpTypeDeclaration.class);
+//        if (typeDeclaration == null) return Collections.emptyList();
+//        return typeDeclaration.getClassReferences().stream()
+//                .map(PhpReference::getFQN)
+//                .collect(Collectors.toList());
+        return null;
     }
 
     public static boolean isFunctionReference(PsiElement psiElement, String functionName) {

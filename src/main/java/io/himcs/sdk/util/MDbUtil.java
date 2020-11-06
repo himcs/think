@@ -1,6 +1,5 @@
 package io.himcs.sdk.util;
 
-import com.intellij.database.model.DasNamed;
 import com.intellij.database.model.DasTable;
 import com.intellij.database.psi.DbDataSource;
 import com.intellij.database.util.DasUtil;
