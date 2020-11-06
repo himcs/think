@@ -37,8 +37,7 @@ public class PhpElementsUtil {
         FunctionReference method = PsiTreeUtil.getParentOfType(psiElement, FunctionReference.class);
         if (method.getName().equals(functionName))
             return true;
-        else
-            return false;
+        else return false;
     }
 
 }
