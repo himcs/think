@@ -1,0 +1,38 @@
+// Copyright 2000-2020 JetBrains s.r.o. and other contributors. Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
+
+plugins {
+    id 'java'
+    id 'org.jetbrains.intellij' version '0.4.21'
+}
+
+group 'io.himcs.sdk'
+version '0.0.1'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+// See https://github.com/JetBrains/gradle-intellij-plugin/
+intellij {
+    version = "${intellijVersion}"
+    updateSinceUntilBuild false
+    plugins = [
+
+            "com.jetbrains.php:${phpPluginVersion}",
+            'com.intellij.database',
+            'java-i18n',
+            'properties'
+    ]
+}
+
+buildSearchableOptions {
+    enabled = false
+}
+
+patchPluginXml {
+    version = project.version
+    sinceBuild = '201.6668.153'
+    untilBuild = '201.6668.153'
+}
