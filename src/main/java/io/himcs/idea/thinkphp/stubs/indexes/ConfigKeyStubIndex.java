@@ -1,4 +1,4 @@
-package io.himcs.idea.thinkphp.stub;
+package io.himcs.idea.thinkphp.stubs.indexes;
 
 import com.intellij.psi.PsiFile;
 import com.intellij.util.indexing.*;
@@ -10,7 +10,7 @@ import com.jetbrains.php.lang.PhpFileType;
 import com.jetbrains.php.lang.psi.PhpFile;
 import de.espend.idea.laravel.util.ArrayReturnPsiRecursiveVisitor;
 import gnu.trove.THashMap;
-import io.himcs.idea.thinkphp.framework.config.ConfigFileUtil;
+import io.himcs.idea.thinkphp.framework.ConfigFileUtil;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;

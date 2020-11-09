@@ -10,7 +10,7 @@ import fr.adrienbrault.idea.symfony2plugin.codeInsight.GotoCompletionProvider;
 import fr.adrienbrault.idea.symfony2plugin.codeInsight.GotoCompletionRegistrar;
 import fr.adrienbrault.idea.symfony2plugin.codeInsight.GotoCompletionRegistrarParameter;
 import io.himcs.idea.thinkphp.codeInsight.AccepterFactory;
-import io.himcs.idea.thinkphp.stub.ConfigKeyStubIndex;
+import io.himcs.idea.thinkphp.stubs.indexes.ConfigKeyStubIndex;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
