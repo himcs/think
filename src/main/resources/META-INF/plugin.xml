@@ -36,7 +36,8 @@
           for information about the elements and attributes used for actions and groups.
           The <action> element adds a static menu item in first position of the Tools menu that shows PopupDialogAction.
         -->
-        <action id="io.himcs.sdk.action.PopupDialogAction" class="io.himcs.sdk.action.PopupDialogAction"
+        <action id="io.himcs.idea.thinkphp.action.PopupDialogAction"
+                class="io.himcs.idea.thinkphp.action.PopupDialogAction"
                 text="Action Basics Plugin: Pop Dialog Action" description="SDK action example"
                 icon="SdkIcons.Sdk_default_icon">
             <override-text place="MainMenu" text="Pop Dialog Action"/>
@@ -56,8 +57,9 @@
         <group id="org.intellij.sdk.action.GroupedActions" text="Static Grouped Actions" popup="true"
                icon="SdkIcons.Sdk_default_icon">
             <add-to-group group-id="ToolsMenu" anchor="after"
-                          relative-to-action="org.intellij.sdk.action.PopupDialogAction"/>
-            <action class="io.himcs.sdk.action.PopupDialogAction" id="org.intellij.sdk.action.GroupPopDialogAction"
+                          relative-to-action="io.himcs.idea.thinkphp.action.PopupDialogAction"/>
+            <action class="io.himcs.idea.thinkphp.action.PopupDialogAction"
+                    id="io.himcs.idea.thinkphp.action.PopupDialogAction"
                     text="A Group Action" description="SDK static grouped action example"
                     icon="SdkIcons.Sdk_default_icon">
             </action>
@@ -66,12 +68,13 @@
           CustomDefaultActionGroup demonstrates declaring an action group based on a ActionGroup class supplied by this
           plugin. This group is to be inserted atop the Editor Popup Menu. It declares one action in the group.
         -->
-        <group id="io.himcs.sdk.action.CustomDefaultActionGroup"
-               class="io.himcs.sdk.action.CustomDefaultActionGroup" popup="true"
+        <group id="io.himcs.idea.thinkphp.action.CustomDefaultActionGroup"
+               class="io.himcs.idea.thinkphp.action.CustomDefaultActionGroup" popup="true"
                text="Popup Grouped Actions" description="Custom defaultActionGroup demo"
                icon="SdkIcons.Sdk_default_icon">
             <add-to-group group-id="EditorPopupMenu" anchor="first"/>
-            <action class="io.himcs.sdk.action.PopupDialogAction" id="org.intellij.sdk.action.CustomGroupedAction"
+            <action class="io.himcs.idea.thinkphp.action.PopupDialogAction"
+                    id="org.intellij.sdk.action.CustomGroupedAction"
                     text="A Popup Action" description="SDK popup grouped action example"
                     icon="SdkIcons.Sdk_default_icon"/>
         </group>
@@ -79,7 +82,8 @@
           DynamicActionGroup demonstrates declaring an action group without a static action declaration.
           An action is added to the group programmatically in the DynamicActionGroup implementation.
         -->
-        <group id="io.himcs.sdk.action.DynamicActionGroup" class="io.himcs.sdk.action.DynamicActionGroup"
+        <group id="io.himcs.idea.thinkphp.action.DynamicActionGroup"
+               class="io.himcs.idea.thinkphp.action.DynamicActionGroup"
                popup="true" text="Dynamically Grouped Actions" description="SDK dynamically grouped action example"
                icon="SdkIcons.Sdk_default_icon">
             <add-to-group group-id="ToolsMenu" anchor="after"
@@ -87,7 +91,7 @@
         </group>
 
         <action id="EditorBasics.EditorIllustrationAction"
-                class="io.himcs.sdk.editor.EditorIllustrationAction"
+                class="io.himcs.idea.thinkphp.editor.EditorIllustrationAction"
                 text="Editor Replace Text"
                 description="Replaces selected text with 'Replacement'."
                 icon="SdkIcons.Sdk_default_icon">
@@ -96,7 +100,7 @@
 
         <!-- Place this entry first in the popup menu; it's always enabled if a project and editor are open -->
         <action id="EditorBasics.LogicalPositionIllustration"
-                class="io.himcs.sdk.editor.EditorAreaIllustration"
+                class="io.himcs.idea.thinkphp.editor.EditorAreaIllustration"
                 text="Caret Position"
                 description="Reports information about the caret position."
                 icon="SdkIcons.Sdk_default_icon">
@@ -105,7 +109,7 @@
         </action>
 
         <action id="EditorBasics.EditorHandlerIllustration"
-                class="io.himcs.sdk.editor.EditorHandlerIllustration"
+                class="io.himcs.idea.thinkphp.editor.EditorHandlerIllustration"
                 text="Editor Add Caret"
                 description="Adds a second caret below the existing one."
                 icon="SdkIcons.Sdk_default_icon">
@@ -113,7 +117,7 @@
         </action>
 
         <action id="EditorBasics.ProjectAction"
-                class="io.himcs.sdk.action.ProjectAction"
+                class="io.himcs.idea.thinkphp.action.ProjectAction"
                 text="ProjectAction"
                 description="Adds a second caret below the existing one."
                 icon="SdkIcons.Sdk_default_icon">
@@ -129,7 +133,10 @@
     <extensions defaultExtensionNs="com.intellij">
 
         <completion.contributor language="PHP"
-                                implementationClass="io.himcs.sdk.codeInsight.completion.MyCompletionContributor"/>
+                                implementationClass="io.himcs.idea.thinkphp.codeInsight.completion.ThinkPHPCompletionContributor"/>
+
+        <fileBasedIndex implementation="io.himcs.idea.thinkphp.stub.ConfigKeyStubIndex"/>
+
     </extensions>
 
     <depends>com.jetbrains.php</depends>
