@@ -124,13 +124,16 @@
         <!--            <add-to-group group-id="EditorPopupMenu" anchor="first"/>-->
         <!--        </action>-->
 
-<!--        <action id="Thinkphp.openBrowser"-->
+        <!--        <action id="Thinkphp.openBrowser"-->
         <!--                class="io.himcs.idea.thinkphp.action.ActionOpenBrowser"-->
         <!--                text="openBrowser"-->
         <!--                description="openBrowser"-->
         <!--                icon="SdkIcons.Sdk_default_icon">-->
         <!--            <add-to-group group-id="EditorPopupMenu" anchor="first"/>-->
         <!--        </action>-->
+        <action class="io.himcs.idea.thinkphp.action.TplAction" text="all tpl">
+            <add-to-group group-id="EditorPopupMenu" anchor="first"/>
+        </action>
     </actions>
 
     <!--    <extensions defaultExtensionNs="com.intellij">-->
@@ -139,10 +142,17 @@
 
 
     <extensions defaultExtensionNs="com.intellij">
-        <webBrowserUrlProvider implementation="io.himcs.idea.thinkphp.builtInWebServer.ThinkPHPUrlProvider" order="first"/>
+        <webBrowserUrlProvider implementation="io.himcs.idea.thinkphp.builtInWebServer.ThinkPHPUrlProvider"
+                               order="first"/>
+
+        <!--        跳转到视图-->
+        <codeInsight.lineMarkerProvider language="PHP"
+                                        implementationClass="io.himcs.idea.thinkphp.codeInsight.ThinkPHPRecursiveCallLineMarkerProvider"/>
+
 
         <completion.contributor language="PHP"
                                 implementationClass="io.himcs.idea.thinkphp.codeInsight.completion.ThinkPHPCompletionContributor"/>
+
 
         <fileBasedIndex implementation="io.himcs.idea.thinkphp.stubs.indexes.ConfigKeyStubIndex"/>
 
