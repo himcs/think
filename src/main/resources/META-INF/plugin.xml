@@ -142,18 +142,35 @@
 
 
     <extensions defaultExtensionNs="com.intellij">
+
+        <applicationConfigurable parentId="tools" instance="org.intellij.sdk.settings.AppSettingsConfigurable"
+                                 id="org.intellij.sdk.settings.AppSettingsConfigurable"
+                                 displayName="SDK: Application Settings Example"/>
+        <applicationService serviceImplementation="org.intellij.sdk.settings.AppSettingsState"/>
+
+
+        <projectConfigurable instance="io.himcs.idea.thinkphp.settings.ThinkPHPSettingsConfigurable"
+                             id="io.himcs.idea.thinkphp.settings.ThinkPHPSettingsConfigurable"
+                             displayName="ThinkPHP3"
+                             parentId="reference.webide.settings.project.settings.php"
+                             nonDefaultProject="true"
+        />
+
+        <projectService serviceImplementation="io.himcs.idea.thinkphp.settings.ThinkPHPSettingsState"/>
+
+        <!--在浏览器中打开-->
         <webBrowserUrlProvider implementation="io.himcs.idea.thinkphp.builtInWebServer.ThinkPHPUrlProvider"
                                order="first"/>
 
-        <!--        跳转到视图-->
+        <!--跳转到视图-->
         <codeInsight.lineMarkerProvider language="PHP"
                                         implementationClass="io.himcs.idea.thinkphp.codeInsight.ThinkPHPRecursiveCallLineMarkerProvider"/>
 
-
+        <!--代码自动完成-->
         <completion.contributor language="PHP"
                                 implementationClass="io.himcs.idea.thinkphp.codeInsight.completion.ThinkPHPCompletionContributor"/>
 
-
+        <!--索引配置方法-->
         <fileBasedIndex implementation="io.himcs.idea.thinkphp.stubs.indexes.ConfigKeyStubIndex"/>
 
     </extensions>

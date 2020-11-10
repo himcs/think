@@ -3,6 +3,7 @@ package io.himcs.idea.thinkphp.framework;
 import com.intellij.codeInsight.daemon.RelatedItemLineMarkerInfo;
 import com.intellij.codeInsight.navigation.NavigationGutterIconBuilder;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.project.ProjectManager;
 import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
@@ -12,7 +13,7 @@ import com.intellij.util.PlatformIcons;
 import com.jetbrains.php.lang.psi.elements.Method;
 import com.jetbrains.php.lang.psi.elements.PhpClass;
 import com.jetbrains.php.lang.psi.elements.impl.MethodImpl;
-import kotlin.reflect.jvm.internal.impl.renderer.ClassifierNamePolicy;
+import io.himcs.idea.thinkphp.settings.ThinkPHPSettingsState;
 
 import java.io.File;
 import java.nio.file.Paths;
@@ -33,15 +34,21 @@ public class ThinkPHPUtil {
         return containingMethod;
     }
 
-    public static String getUrl0(String group, String action, String method) {
-        return String.format("test.hudoufc.com/index.php?g=%s&m=%s&a=%s", group, action, method);
+    public static String getUrl0(Project project, String group, String action, String method) {
+        return String.format(ThinkPHPSettingsState.getInstance(project).Host + "/index.php?g=%s&m=%s&a=%s", group, action, method);
     }
 
     public static RelatedItemLineMarkerInfo getTplPsi(Project project, MethodImpl method) {
 
+
         String mName = method.getName();
-        System.out.println(mName);
-        VirtualFile virtualFile = LocalFileSystem.getInstance().findFileByPath(Paths.get(project.getBasePath(), "Tpl\\" + computeGroup(method) + "\\default\\" + computeModule(method) + "\\" + mName + ".html").toString());
+
+        ThinkPHPSettingsState setting = ThinkPHPSettingsState.getInstance(project);
+
+        VirtualFile virtualFile = LocalFileSystem.getInstance().findFileByPath(
+                Paths.get(
+                        project.getBasePath(),
+                        setting.TplPath, computeGroup(method), setting.theme, computeModule(method), mName + ".html").toString());
         if (Objects.nonNull(virtualFile) && virtualFile.exists()) {
             PsiElement target = PsiManager.getInstance(project).findFile(virtualFile).getFirstChild();
             NavigationGutterIconBuilder<PsiElement> builder = NavigationGutterIconBuilder

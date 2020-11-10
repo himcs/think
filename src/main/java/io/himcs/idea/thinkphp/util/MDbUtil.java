@@ -6,6 +6,7 @@ import com.intellij.database.util.DasUtil;
 import com.intellij.database.util.DbUtil;
 import com.intellij.openapi.project.Project;
 import com.intellij.util.containers.JBIterable;
+import io.himcs.idea.thinkphp.settings.ThinkPHPSettingsState;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -21,7 +22,8 @@ public class MDbUtil {
         } else {
             DbDataSource work = null;
             for (DbDataSource db : dataSources) {
-                if (db.getName().contains("work")) {
+                String link = ThinkPHPSettingsState.getInstance(project).DBLinkName;
+                if (db.getName().equals(link)) {
                     work = db;
                     break;
                 }

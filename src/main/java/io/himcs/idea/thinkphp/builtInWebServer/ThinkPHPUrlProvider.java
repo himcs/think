@@ -2,26 +2,14 @@ package io.himcs.idea.thinkphp.builtInWebServer;
 
 import com.intellij.ide.browsers.OpenInBrowserRequest;
 import com.intellij.ide.browsers.WebBrowserUrlProvider;
-import com.intellij.ide.util.EditorHelper;
-import com.intellij.openapi.actionSystem.CommonDataKeys;
-import com.intellij.openapi.editor.Editor;
-import com.intellij.openapi.editor.EditorFactory;
-import com.intellij.openapi.fileEditor.FileEditor;
-import com.intellij.openapi.fileEditor.FileEditorLocation;
-import com.intellij.openapi.fileEditor.FileEditorManager;
-import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.psi.PsiDocumentManager;
 import com.intellij.psi.PsiFile;
-import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.Url;
-import com.intellij.util.UrlImpl;
 import com.intellij.util.Urls;
 import com.jetbrains.php.lang.psi.elements.Method;
 import io.himcs.idea.thinkphp.framework.ThinkPHPUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.jetbrains.builtInWebServer.BuiltInWebBrowserUrlProvider;
 
 import java.util.Objects;
 
@@ -49,7 +37,7 @@ public class ThinkPHPUrlProvider extends WebBrowserUrlProvider {
         if (Objects.nonNull(containingMethod)) {
             method = containingMethod.getName();
         }
-        return Urls.newHttpUrl("", ThinkPHPUtil.getUrl0(group, action, method));
+        return Urls.newHttpUrl("", ThinkPHPUtil.getUrl0(request.getProject(), group, action, method));
     }
 
     @Override

@@ -5,8 +5,8 @@ import fr.adrienbrault.idea.symfony2plugin.codeInsight.GotoCompletionContributor
 import fr.adrienbrault.idea.symfony2plugin.codeInsight.GotoCompletionLanguageRegistrar;
 import fr.adrienbrault.idea.symfony2plugin.codeInsight.GotoCompletionRegistrar;
 import fr.adrienbrault.idea.symfony2plugin.codeInsight.GotoCompletionRegistrarParameter;
-import io.himcs.idea.thinkphp.codeInsight.functions.MFunction;
 import io.himcs.idea.thinkphp.codeInsight.functions.CFunction;
+import io.himcs.idea.thinkphp.codeInsight.functions.MFunction;
 
 import java.util.ArrayList;
 import java.util.Collection;
