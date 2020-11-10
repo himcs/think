@@ -3,10 +3,10 @@
 <idea-plugin>
 
     <!-- Unique id for this plugin. Must stay constant for the life of the plugin. -->
-    <id>org.intellij.sdk.action</id>
+    <id>io.himcs.idea.thinkphp</id>
 
     <!-- Text to display as name on Preferences/Settings | Plugin page -->
-    <name>SDK: Action Sample</name>
+    <name>ThinkPHP3</name>
 
     <!-- Indicate this plugin can be loaded in all IntelliJ Platform-based products. -->
     <depends>com.intellij.modules.platform</depends>
@@ -14,21 +14,19 @@
     <!-- Text to display as description on Preferences/Settings | Plugin page -->
     <description>
         <![CDATA[
-      Demonstrates implementing Action and Action Group patterns.<br> Adds entries to the Tools menu.
+    ThinkPHP3 IDEA 增强工具,支持自动补全`D``M``C`方法,跳转模板文件,浏览器中打开等功能
     ]]>
     </description>
     <change-notes>
         <![CDATA[
       <ul>
-        <li><b>2.0.0</b> Renamed from register_actions and converted to Gradle project.</li>
-        <li><b>1.1</b> Refactor to give users feedback when selecting menu items.</li>
-        <li><b>1.0</b> Release 2018.3 and earlier.</li>
+        <li><b>0.0.1</b> ThinkPHP3 初始版本 支持自动补全`D``M``C`方法,跳转模板文件,浏览器中打开</li>
       </ul>
     ]]>
     </change-notes>
 
     <!-- Text to display as company information on Preferences/Settings | Plugin page -->
-    <vendor url="https://plugins.jetbrains.com">IntelliJ Platform SDK</vendor>
+    <vendor url="https://github.com/himcs/think">himcs</vendor>
 
     <actions>
         <!--

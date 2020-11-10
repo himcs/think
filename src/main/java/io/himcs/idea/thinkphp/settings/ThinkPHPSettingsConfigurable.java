@@ -1,6 +1,5 @@
 package io.himcs.idea.thinkphp.settings;
 
-import b.f.a.S;
 import com.intellij.openapi.options.Configurable;
 import com.intellij.openapi.project.Project;
 import org.jetbrains.annotations.Nls;
