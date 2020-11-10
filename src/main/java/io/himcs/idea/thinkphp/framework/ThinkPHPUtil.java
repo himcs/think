@@ -10,9 +10,11 @@ import com.intellij.psi.PsiManager;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.PlatformIcons;
 import com.jetbrains.php.lang.psi.elements.Method;
+import com.jetbrains.php.lang.psi.elements.PhpClass;
 import com.jetbrains.php.lang.psi.elements.impl.MethodImpl;
 import kotlin.reflect.jvm.internal.impl.renderer.ClassifierNamePolicy;
 
+import java.io.File;
 import java.nio.file.Paths;
 import java.util.Objects;
 
@@ -39,7 +41,7 @@ public class ThinkPHPUtil {
 
         String mName = method.getName();
         System.out.println(mName);
-        VirtualFile virtualFile = LocalFileSystem.getInstance().findFileByPath(Paths.get(project.getBasePath(), "Tpl\\Admin\\default\\Admin\\" + mName + ".html").toString());
+        VirtualFile virtualFile = LocalFileSystem.getInstance().findFileByPath(Paths.get(project.getBasePath(), "Tpl\\" + computeGroup(method) + "\\default\\" + computeModule(method) + "\\" + mName + ".html").toString());
         if (Objects.nonNull(virtualFile) && virtualFile.exists()) {
             PsiElement target = PsiManager.getInstance(project).findFile(virtualFile).getFirstChild();
             NavigationGutterIconBuilder<PsiElement> builder = NavigationGutterIconBuilder
@@ -51,4 +53,22 @@ public class ThinkPHPUtil {
         return null;
     }
 
+    public static String computeGroup(MethodImpl method) {
+        PhpClass phpClass = PsiTreeUtil.getParentOfType(method, PhpClass.class);
+        String group = phpClass.getContainingFile().getParent().getName();
+        return group;
+    }
+
+    public static String computeModule(MethodImpl method) {
+        PhpClass phpClass = PsiTreeUtil.getParentOfType(method, PhpClass.class);
+        String module = phpClass.getName().substring(0, phpClass.getName().lastIndexOf("Action"));
+        return module;
+    }
+
+    public static String computePath(MethodImpl method) {
+        PhpClass phpClass = PsiTreeUtil.getParentOfType(method, PhpClass.class);
+        String module = phpClass.getName().substring(0, phpClass.getName().lastIndexOf("Action"));
+        String group = phpClass.getContainingFile().getParent().getName();
+        return String.join(File.separator, group, module, method.getName());
+    }
 }
