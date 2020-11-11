@@ -17,12 +17,13 @@ import io.himcs.idea.thinkphp.settings.ThinkPHPSettingsState;
 import java.io.File;
 import java.nio.file.Paths;
 import java.util.Objects;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class ThinkPHPUtil {
     public static boolean isAction(String action) {
         return action.indexOf("Action.class.php") > 0;
     }
-
 
     public static String formatAction(String fName) {
         return fName.substring(0, fName.indexOf("Action.class.php"));
@@ -39,12 +40,8 @@ public class ThinkPHPUtil {
     }
 
     public static RelatedItemLineMarkerInfo getTplPsi(Project project, MethodImpl method) {
-
-
         String mName = method.getName();
-
         ThinkPHPSettingsState setting = ThinkPHPSettingsState.getInstance(project);
-
         VirtualFile virtualFile = LocalFileSystem.getInstance().findFileByPath(
                 Paths.get(
                         project.getBasePath(),
@@ -77,5 +74,12 @@ public class ThinkPHPUtil {
         String module = phpClass.getName().substring(0, phpClass.getName().lastIndexOf("Action"));
         String group = phpClass.getContainingFile().getParent().getName();
         return String.join(File.separator, group, module, method.getName());
+    }
+
+    public static Matcher parseUrl(String url) {
+        String s = url;
+        Pattern pattern = Pattern.compile(".*\\?g=(\\w+)&m=(\\w+)&a=(\\w+)");
+        Matcher matcher = pattern.matcher(s);
+        return matcher;
     }
 }

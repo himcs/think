@@ -44,7 +44,6 @@ public class TplHTMLUrlProvider extends WebBrowserUrlProvider {
         ThinkPHPSettingsState settingsState = ThinkPHPSettingsState.getInstance(request.getProject());
         String path = file.getVirtualFile().getPath();
         boolean isInTplPath = path.contains(settingsState.TplPath) && path.contains(settingsState.theme);
-        System.out.println(path + ":" + isInTplPath);
         return isInTplPath;
     }
 }

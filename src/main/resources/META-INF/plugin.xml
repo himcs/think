@@ -36,6 +36,7 @@
             <li>PHP/Action Tpl/*.html: open in browser<li>
             <li>PHP/View: goto for view templates</li>
             <li>PHP/Config: Config key indexer</li>
+            <li>PHP/Editor: Automatically parse pasted content(control alt q) </li>
       </ul>
     ]]>
     </description>
@@ -48,12 +49,24 @@
                 <li>PHP/Action Tpl/*.html: open in browser<li>
                 <li>PHP/View: goto for view templates</li>
                 <li>PHP/Config: Config key indexer</li>
+                <li>PHP/Editor: Automatically parse pasted content(control alt q) </li>
           </ul>
     ]]>
     </change-notes>
 
     <!-- Text to display as company information on Preferences/Settings | Plugin page -->
     <vendor email="mcshimcs@gmail.com" url="https://himcs.github.io/">himcs</vendor>
+
+    <actions>
+        <action id="Thinkphp.openBrowser"
+                class="io.himcs.idea.thinkphp.action.TplAction"
+                text="ThinkUrlParser"
+                description="ThinkUrlParser"
+        >
+            <add-to-group group-id="ToolsMenu" anchor="last"/>
+            <keyboard-shortcut first-keystroke="control alt q" keymap="$default"/>
+        </action>
+    </actions>
 
     <extensions defaultExtensionNs="com.intellij">
 
@@ -67,9 +80,12 @@
         <projectService serviceImplementation="io.himcs.idea.thinkphp.settings.ThinkPHPSettingsState"/>
 
         <!--在浏览器中打开-->
-        <webBrowserUrlProvider id="io.himcs.idea.thinkphp.builtInWebServer.ThinkPHPUrlProvider" implementation="io.himcs.idea.thinkphp.builtInWebServer.ThinkPHPUrlProvider"
+        <webBrowserUrlProvider id="io.himcs.idea.thinkphp.builtInWebServer.ThinkPHPUrlProvider"
+                               implementation="io.himcs.idea.thinkphp.builtInWebServer.ThinkPHPUrlProvider"
                                order="first"/>
-        <webBrowserUrlProvider id="io.himcs.idea.thinkphp.builtInWebServer.TplHTMLUrlProvider" implementation="io.himcs.idea.thinkphp.builtInWebServer.TplHTMLUrlProvider" order="after io.himcs.idea.thinkphp.builtInWebServer.ThinkPHPUrlProvider"/>
+        <webBrowserUrlProvider id="io.himcs.idea.thinkphp.builtInWebServer.TplHTMLUrlProvider"
+                               implementation="io.himcs.idea.thinkphp.builtInWebServer.TplHTMLUrlProvider"
+                               order="after io.himcs.idea.thinkphp.builtInWebServer.ThinkPHPUrlProvider"/>
 
         <!--跳转到视图-->
         <codeInsight.lineMarkerProvider language="PHP"
