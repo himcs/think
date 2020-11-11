@@ -5,8 +5,8 @@ plugins {
     id 'org.jetbrains.intellij' version '0.4.21'
 }
 
-group 'io.himcs.sdk'
-version '0.0.1'
+group 'io.himcs.idea.thinkphp'
+version '0.0.2'
 
 sourceCompatibility = 1.8
 
