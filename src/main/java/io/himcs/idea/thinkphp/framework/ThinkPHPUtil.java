@@ -23,6 +23,7 @@ public class ThinkPHPUtil {
         return action.indexOf("Action.class.php") > 0;
     }
 
+
     public static String formatAction(String fName) {
         return fName.substring(0, fName.indexOf("Action.class.php"));
     }

@@ -21,8 +21,6 @@ public class ThinkPHPUrlProvider extends WebBrowserUrlProvider {
             return super.getUrl(request, file);
         }
         String fName = file.getName();
-
-
         if (!ThinkPHPUtil.isAction(fName)) {
             return super.getUrl(request, file);
         }

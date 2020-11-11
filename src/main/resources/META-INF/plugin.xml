@@ -33,7 +33,7 @@
             <li>PHP/C: C function completion</li>
             <li>PHP/D: D function completion</li>
             <li>PHP/M: M function completion</li>
-            <li>PHP/Action: open in browser<li>
+            <li>PHP/Action Tpl/*.html: open in browser<li>
             <li>PHP/View: goto for view templates</li>
             <li>PHP/Config: Config key indexer</li>
       </ul>
@@ -45,7 +45,7 @@
                 <li>PHP/C: C function completion</li>
                 <li>PHP/D: D function completion</li>
                 <li>PHP/M: M function completion</li>
-                <li>PHP/Action: open in browser<li>
+                <li>PHP/Action Tpl/*.html: open in browser<li>
                 <li>PHP/View: goto for view templates</li>
                 <li>PHP/Config: Config key indexer</li>
           </ul>
@@ -67,8 +67,9 @@
         <projectService serviceImplementation="io.himcs.idea.thinkphp.settings.ThinkPHPSettingsState"/>
 
         <!--在浏览器中打开-->
-        <webBrowserUrlProvider implementation="io.himcs.idea.thinkphp.builtInWebServer.ThinkPHPUrlProvider"
+        <webBrowserUrlProvider id="io.himcs.idea.thinkphp.builtInWebServer.ThinkPHPUrlProvider" implementation="io.himcs.idea.thinkphp.builtInWebServer.ThinkPHPUrlProvider"
                                order="first"/>
+        <webBrowserUrlProvider id="io.himcs.idea.thinkphp.builtInWebServer.TplHTMLUrlProvider" implementation="io.himcs.idea.thinkphp.builtInWebServer.TplHTMLUrlProvider" order="after io.himcs.idea.thinkphp.builtInWebServer.ThinkPHPUrlProvider"/>
 
         <!--跳转到视图-->
         <codeInsight.lineMarkerProvider language="PHP"
