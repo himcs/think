@@ -60,15 +60,15 @@ public class TplAction extends AnAction {
                 Editor editor = FileEditorManager.getInstance(project).getSelectedTextEditor();
                 Caret primaryCaret = editor.getCaretModel().getPrimaryCaret();
 
-                int offset = editor.getDocument().getText().indexOf("function index");
+                int offset = editor.getDocument().getText().indexOf("function " + action);
                 if (offset < 0) {
-                    editor.getDocument().getText().indexOf("function    index");
+                    editor.getDocument().getText().indexOf("function    " + action);
                 }
                 if (offset < 0) {
-                    editor.getDocument().getText().indexOf("function  index");
+                    editor.getDocument().getText().indexOf("function  " + action);
                 }
                 if (offset < 0) {
-                    editor.getDocument().getText().indexOf("function    index");
+                    editor.getDocument().getText().indexOf("function    " + action);
                 }
                 if (offset < 0) {
                     offset = 0;
