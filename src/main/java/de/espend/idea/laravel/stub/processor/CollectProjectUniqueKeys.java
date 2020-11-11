@@ -31,6 +31,13 @@ public class CollectProjectUniqueKeys implements Processor<String> {
         this.stringSet = new HashSet<>();
     }
 
+    @NotNull
+    public static Set<String> collect(@NotNull Project project, @NotNull ID<String, ?> id) {
+        CollectProjectUniqueKeys collector = new CollectProjectUniqueKeys(project, id);
+        FileBasedIndex.getInstance().processAllKeys(id, collector, project);
+        return collector.getResult();
+    }
+
     @Override
     public boolean process(String s) {
         this.stringSet.add(s);
@@ -48,12 +55,5 @@ public class CollectProjectUniqueKeys implements Processor<String> {
         }
 
         return set;
-    }
-
-    @NotNull
-    public static Set<String> collect(@NotNull Project project, @NotNull ID<String, ?> id) {
-        CollectProjectUniqueKeys collector = new CollectProjectUniqueKeys(project, id);
-        FileBasedIndex.getInstance().processAllKeys(id, collector, project);
-        return collector.getResult();
     }
 }

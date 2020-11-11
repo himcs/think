@@ -30,7 +30,8 @@ public abstract class GotoCompletionProvider implements GotoCompletionProviderIn
         return Collections.emptyList();
     }
 
-    public void getLookupElements(CompletionContributorParameter parameter) {}
+    public void getLookupElements(CompletionContributorParameter parameter) {
+    }
 
     @NotNull
     public Collection<? extends PsiElement> getPsiTargets(@NotNull PsiElement psiElement, int offset, @NotNull Editor editor) {

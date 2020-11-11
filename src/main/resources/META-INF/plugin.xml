@@ -14,138 +14,46 @@
     <!-- Text to display as description on Preferences/Settings | Plugin page -->
     <description>
         <![CDATA[
-    ThinkPHP3 IDEA 增强工具,支持自动补全`D``M``C`方法,跳转模板文件,浏览器中打开等功能
+        <h1>ThinkPHP3 Plugin</h1><br>
+        <br/>
+        <a href="https://github.com/himcs/think/issues">Issues</a>
+        <br/>
+        <h2>Install</h2>
+        <ul>
+            <li>Install plugin and active it per Project under "Settings > Languages & Frameworks > PHP > ThinkPHP3"</li>
+            <li>Configure  Views directory, if not using default file structure</li>
+            <li>Enjoy it</li>
+        </ul>
+      <br>
+
+      <h2>Features</h2>
+      <ul>
+            <li>PHP/C: C function completion</li>
+            <li>PHP/D: D function completion</li>
+            <li>PHP/M: M function completion</li>
+            <li>PHP/Action: open in browser<li>
+            <li>PHP/View: goto for view templates</li>
+            <li>PHP/Config: Config key indexer</li>
+      </ul>
     ]]>
     </description>
     <change-notes>
         <![CDATA[
-      <ul>
-        <li><b>0.0.1</b> ThinkPHP3 初始版本 支持自动补全`D``M``C`方法,跳转模板文件,浏览器中打开</li>
-      </ul>
+        <ul>
+                <li>PHP/C: C function completion</li>
+                <li>PHP/D: D function completion</li>
+                <li>PHP/M: M function completion</li>
+                <li>PHP/Action: open in browser<li>
+                <li>PHP/View: goto for view templates</li>
+                <li>PHP/Config: Config key indexer</li>
+          </ul>
     ]]>
     </change-notes>
 
     <!-- Text to display as company information on Preferences/Settings | Plugin page -->
-    <vendor url="https://github.com/himcs/think">himcs</vendor>
-
-    <actions>
-        <!--
-          See https://www.jetbrains.org/intellij/sdk/docs/basics/action_system.html#registering-actions-in-pluginxml
-          for information about the elements and attributes used for actions and groups.
-          The <action> element adds a static menu item in first position of the Tools menu that shows PopupDialogAction.
-        -->
-        <!--        <action id="io.himcs.idea.thinkphp.action.PopupDialogAction"-->
-        <!--                class="io.himcs.idea.thinkphp.action.PopupDialogAction"-->
-        <!--                text="Action Basics Plugin: Pop Dialog Action" description="SDK action example"-->
-        <!--                icon="SdkIcons.Sdk_default_icon">-->
-        <!--            <override-text place="MainMenu" text="Pop Dialog Action"/>-->
-        <!--            <keyboard-shortcut first-keystroke="control alt A" second-keystroke="C" keymap="$default"/>-->
-        <!--            <mouse-shortcut keystroke="control button3 doubleClick" keymap="$default"/>-->
-        <!--            <add-to-group group-id="ToolsMenu" anchor="first"/>-->
-        <!--        </action>-->
-        <!--
-          All of the following menu groups add the action PopupDialogAction to menus in different ways.
-          Note that even though these groups reuse the same action class, in each use the action ids are unique.
-          GroupedActions demonstrates declaring an action group using the default ActionGroup implementation provided by the
-          IntelliJ Platform framework. (Note the lack of a group "class" attribute.) GroupedActions gets inserted after
-          PopupDialogAction in the Tools menu. Because the group's implementation is default, it cannot impose
-          enable/disable conditions. Instead it must rely on the conditions imposed by the parent menu where it is inserted.
-          It declares one action in the group.
-        -->
-        <!--        <group id="org.intellij.sdk.action.GroupedActions" text="Static Grouped Actions" popup="true"-->
-        <!--               icon="SdkIcons.Sdk_default_icon">-->
-        <!--            <add-to-group group-id="ToolsMenu" anchor="after"-->
-        <!--                          relative-to-action="io.himcs.idea.thinkphp.action.PopupDialogAction"/>-->
-        <!--            <action class="io.himcs.idea.thinkphp.action.PopupDialogAction"-->
-        <!--                    id="io.himcs.idea.thinkphp.action.PopupDialogAction"-->
-        <!--                    text="A Group Action" description="SDK static grouped action example"-->
-        <!--                    icon="SdkIcons.Sdk_default_icon">-->
-        <!--            </action>-->
-        <!--        </group>-->
-        <!--
-          CustomDefaultActionGroup demonstrates declaring an action group based on a ActionGroup class supplied by this
-          plugin. This group is to be inserted atop the Editor Popup Menu. It declares one action in the group.
-        -->
-        <!--        <group id="io.himcs.idea.thinkphp.action.CustomDefaultActionGroup"-->
-        <!--               class="io.himcs.idea.thinkphp.action.CustomDefaultActionGroup" popup="true"-->
-        <!--               text="Popup Grouped Actions" description="Custom defaultActionGroup demo"-->
-        <!--               icon="SdkIcons.Sdk_default_icon">-->
-        <!--            <add-to-group group-id="EditorPopupMenu" anchor="first"/>-->
-        <!--            <action class="io.himcs.idea.thinkphp.action.PopupDialogAction"-->
-        <!--                    id="org.intellij.sdk.action.CustomGroupedAction"-->
-        <!--                    text="A Popup Action" description="SDK popup grouped action example"-->
-        <!--                    icon="SdkIcons.Sdk_default_icon"/>-->
-        <!--        </group>-->
-        <!--
-          DynamicActionGroup demonstrates declaring an action group without a static action declaration.
-          An action is added to the group programmatically in the DynamicActionGroup implementation.
-        -->
-        <!--        <group id="io.himcs.idea.thinkphp.action.DynamicActionGroup"-->
-        <!--               class="io.himcs.idea.thinkphp.action.DynamicActionGroup"-->
-        <!--               popup="true" text="Dynamically Grouped Actions" description="SDK dynamically grouped action example"-->
-        <!--               icon="SdkIcons.Sdk_default_icon">-->
-        <!--            <add-to-group group-id="ToolsMenu" anchor="after"-->
-        <!--                          relative-to-action="org.intellij.sdk.action.GroupedActions"/>-->
-        <!--        </group>-->
-
-        <!--        <action id="EditorBasics.EditorIllustrationAction"-->
-        <!--                class="io.himcs.idea.thinkphp.editor.EditorIllustrationAction"-->
-        <!--                text="Editor Replace Text"-->
-        <!--                description="Replaces selected text with 'Replacement'."-->
-        <!--                icon="SdkIcons.Sdk_default_icon">-->
-        <!--            <add-to-group group-id="EditorPopupMenu" anchor="first"/>-->
-        <!--        </action>-->
-
-        <!-- Place this entry first in the popup menu; it's always enabled if a project and editor are open -->
-        <!--        <action id="EditorBasics.LogicalPositionIllustration"-->
-        <!--                class="io.himcs.idea.thinkphp.editor.EditorAreaIllustration"-->
-        <!--                text="Caret Position"-->
-        <!--                description="Reports information about the caret position."-->
-        <!--                icon="SdkIcons.Sdk_default_icon">-->
-        <!--            <keyboard-shortcut keymap="$default" first-keystroke="control alt G"/>-->
-        <!--            <add-to-group group-id="EditorPopupMenu" anchor="first"/>-->
-        <!--        </action>-->
-
-        <!--        <action id="EditorBasics.EditorHandlerIllustration"-->
-        <!--                class="io.himcs.idea.thinkphp.editor.EditorHandlerIllustration"-->
-        <!--                text="Editor Add Caret"-->
-        <!--                description="Adds a second caret below the existing one."-->
-        <!--                icon="SdkIcons.Sdk_default_icon">-->
-        <!--            <add-to-group group-id="EditorPopupMenu" anchor="first"/>-->
-        <!--        </action>-->
-
-        <!--        <action id="EditorBasics.ProjectAction"-->
-        <!--                class="io.himcs.idea.thinkphp.action.ProjectAction"-->
-        <!--                text="ProjectAction"-->
-        <!--                description="Adds a second caret below the existing one."-->
-        <!--                icon="SdkIcons.Sdk_default_icon">-->
-        <!--            <add-to-group group-id="EditorPopupMenu" anchor="first"/>-->
-        <!--        </action>-->
-
-        <!--        <action id="Thinkphp.openBrowser"-->
-        <!--                class="io.himcs.idea.thinkphp.action.ActionOpenBrowser"-->
-        <!--                text="openBrowser"-->
-        <!--                description="openBrowser"-->
-        <!--                icon="SdkIcons.Sdk_default_icon">-->
-        <!--            <add-to-group group-id="EditorPopupMenu" anchor="first"/>-->
-        <!--        </action>-->
-        <action class="io.himcs.idea.thinkphp.action.TplAction" text="all tpl">
-            <add-to-group group-id="EditorPopupMenu" anchor="first"/>
-        </action>
-    </actions>
-
-    <!--    <extensions defaultExtensionNs="com.intellij">-->
-    <!--        <typedHandler implementation="MyTypedHandler"/>-->
-    <!--    </extensions>-->
-
+    <vendor email="mcshimcs@gmail.com" url="https://himcs.github.io/">himcs</vendor>
 
     <extensions defaultExtensionNs="com.intellij">
-
-        <applicationConfigurable parentId="tools" instance="org.intellij.sdk.settings.AppSettingsConfigurable"
-                                 id="org.intellij.sdk.settings.AppSettingsConfigurable"
-                                 displayName="SDK: Application Settings Example"/>
-        <applicationService serviceImplementation="org.intellij.sdk.settings.AppSettingsState"/>
-
 
         <projectConfigurable instance="io.himcs.idea.thinkphp.settings.ThinkPHPSettingsConfigurable"
                              id="io.himcs.idea.thinkphp.settings.ThinkPHPSettingsConfigurable"

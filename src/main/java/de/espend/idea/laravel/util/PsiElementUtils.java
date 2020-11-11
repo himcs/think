@@ -26,7 +26,7 @@ public class PsiElementUtils {
      */
     static public PsiElement[] getChildrenFix(PsiElement psiElement) {
         PsiElement startElement = psiElement.getFirstChild();
-        if(startElement == null) {
+        if (startElement == null) {
             return PsiElement.EMPTY_ARRAY;
         }
 
@@ -43,25 +43,25 @@ public class PsiElementUtils {
     @Nullable
     public static String trimQuote(@Nullable String text) {
 
-        if(text == null) return null;
+        if (text == null) return null;
 
-        return text.replaceAll("^\"|\"$|\'|\'$", "");
+        return text.replaceAll("^\"|\"$|'|'$", "");
     }
 
-    public static boolean isFunctionReference(@NotNull PsiElement psiElement, @NotNull  String functionName,  int parameterIndex) {
+    public static boolean isFunctionReference(@NotNull PsiElement psiElement, @NotNull String functionName, int parameterIndex) {
 
         PsiElement parameterList = psiElement.getParent();
-        if(!(parameterList instanceof ParameterList)) {
+        if (!(parameterList instanceof ParameterList)) {
             return false;
         }
 
         ParameterBag index = PhpElementsUtil.getCurrentParameterIndex(psiElement);
-        if(index == null || index.getIndex() != parameterIndex) {
+        if (index == null || index.getIndex() != parameterIndex) {
             return false;
         }
 
         PsiElement functionCall = parameterList.getParent();
-        if(!(functionCall instanceof FunctionReference)) {
+        if (!(functionCall instanceof FunctionReference)) {
             return false;
         }
 
@@ -74,12 +74,12 @@ public class PsiElementUtils {
 
         PsiManager psiManager = null;
         for (VirtualFile file : files) {
-            if(psiManager == null) {
+            if (psiManager == null) {
                 psiManager = PsiManager.getInstance(project);
             }
 
             PsiFile psiFile = psiManager.findFile(file);
-            if(psiFile != null) {
+            if (psiFile != null) {
                 psiFiles.add(psiFile);
             }
         }

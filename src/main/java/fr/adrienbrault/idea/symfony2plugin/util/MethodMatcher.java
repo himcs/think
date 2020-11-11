@@ -24,19 +24,22 @@ public class MethodMatcher {
     public static MethodMatcher.MethodMatchParameter getMatchedSignatureWithDepth(PsiElement psiElement, CallToSignature[] callToSignatures, int defaultParameterIndex) {
 
 
-
         MethodMatchParameter methodMatchParameter = new StringParameterMatcher(psiElement, defaultParameterIndex)
-            .withSignature(callToSignatures)
-            .match();
+                .withSignature(callToSignatures)
+                .match();
 
-        if(methodMatchParameter != null) {
+        if (methodMatchParameter != null) {
             return methodMatchParameter;
         }
 
         // try on resolved method
         return new StringParameterRecursiveMatcher(psiElement, defaultParameterIndex)
-            .withSignature(callToSignatures)
-            .match();
+                .withSignature(callToSignatures)
+                .match();
+    }
+
+    public interface MethodParameterMatcherInterface {
+        @Nullable MethodMatchParameter match();
     }
 
     public static class CallToSignature {
@@ -101,14 +104,13 @@ public class MethodMatcher {
         public MethodMatchParameter match() {
 
 
-
             MethodReferenceBag bag = PhpElementsUtil.getMethodParameterReferenceBag(psiElement, this.parameterIndex);
-            if(bag == null) {
+            if (bag == null) {
                 return null;
             }
 
             CallToSignature matchedMethodSignature = this.isCallTo(bag.getMethodReference());
-            if(matchedMethodSignature == null) {
+            if (matchedMethodSignature == null) {
                 return null;
             }
 
@@ -127,40 +129,39 @@ public class MethodMatcher {
         public MethodMatchParameter match() {
 
 
-
             MethodReferenceBag bag = PhpElementsUtil.getMethodParameterReferenceBag(psiElement);
-            if(bag == null) {
+            if (bag == null) {
                 return null;
             }
 
             // try on current method
             MethodMatchParameter methodMatchParameter = new StringParameterMatcher(psiElement, parameterIndex)
-                .withSignature(this.signatures)
-                .match();
+                    .withSignature(this.signatures)
+                    .match();
 
-            if(methodMatchParameter != null) {
+            if (methodMatchParameter != null) {
                 return methodMatchParameter;
             }
 
             // walk down next method
             MethodReference methodReference = bag.getMethodReference();
             Method method = Symfony2InterfacesUtil.getMultiResolvedMethod(methodReference);
-            if(method == null) {
+            if (method == null) {
                 return null;
             }
 
             PsiElement[] parameterReferences = PhpElementsUtil.getMethodParameterReferences(method, bag.getParameterBag().getIndex());
-            if(parameterReferences == null || parameterReferences.length == 0) {
+            if (parameterReferences == null || parameterReferences.length == 0) {
                 return null;
             }
 
-            for(PsiElement var: parameterReferences) {
+            for (PsiElement var : parameterReferences) {
 
                 MethodMatchParameter methodMatchParameterRef = new StringParameterMatcher(var, parameterIndex)
-                    .withSignature(this.signatures)
-                    .match();
+                        .withSignature(this.signatures)
+                        .match();
 
-                if(methodMatchParameterRef != null) {
+                if (methodMatchParameterRef != null) {
                     return methodMatchParameterRef;
                 }
 
@@ -170,11 +171,6 @@ public class MethodMatcher {
 
         }
 
-    }
-
-    public interface MethodParameterMatcherInterface {
-        @Nullable
-        public MethodMatchParameter match();
     }
 
     public abstract static class AbstractMethodParameterMatcher implements MethodParameterMatcherInterface {
@@ -208,8 +204,8 @@ public class MethodMatcher {
         protected CallToSignature isCallTo(MethodReference methodReference) {
             Symfony2InterfacesUtil interfacesUtil = new Symfony2InterfacesUtil();
 
-            for(CallToSignature signature: this.signatures) {
-                if(interfacesUtil.isCallTo(methodReference, signature.getInstance(), signature.getMethod())) {
+            for (CallToSignature signature : this.signatures) {
+                if (interfacesUtil.isCallTo(methodReference, signature.getInstance(), signature.getMethod())) {
                     return signature;
                 }
             }

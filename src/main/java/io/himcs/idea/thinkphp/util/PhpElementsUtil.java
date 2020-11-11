@@ -34,9 +34,7 @@ public class PhpElementsUtil {
 
     public static boolean isFunctionReference(PsiElement psiElement, String functionName) {
         FunctionReference method = PsiTreeUtil.getParentOfType(psiElement, FunctionReference.class);
-        if (method.getName().equals(functionName))
-            return true;
-        else return false;
+        return method.getName().equals(functionName);
     }
 
 }

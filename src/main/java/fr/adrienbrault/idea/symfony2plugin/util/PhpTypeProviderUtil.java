@@ -27,7 +27,7 @@ public class PhpTypeProviderUtil {
     public static String getReferenceSignature(MethodReference methodReference, char trimKey, int equalParameterCount) {
 
         String refSignature = methodReference.getSignature();
-        if(StringUtil.isEmpty(refSignature)) {
+        if (StringUtil.isEmpty(refSignature)) {
             return null;
         }
 
@@ -40,7 +40,7 @@ public class PhpTypeProviderUtil {
 
         // we already have a string value
         if ((parameter instanceof StringLiteralExpression)) {
-            String param = ((StringLiteralExpression)parameter).getContents();
+            String param = ((StringLiteralExpression) parameter).getContents();
             if (StringUtil.isNotEmpty(param)) {
                 return refSignature + trimKey + param;
             }
@@ -70,34 +70,31 @@ public class PhpTypeProviderUtil {
     public static String getResolvedParameter(@NotNull PhpIndex phpIndex, @NotNull String parameter) {
 
         // PHP 5.5 class constant: "Class\Foo::class"
-        if(parameter.startsWith("#K#C")) {
+        if (parameter.startsWith("#K#C")) {
             // PhpStorm9: #K#C\Class\Foo.class
-            if(parameter.endsWith(".class")) {
+            if (parameter.endsWith(".class")) {
                 return parameter.substring(4, parameter.length() - 6);
             }
 
             // PhpStorm8: #K#C\Class\Foo.
             // workaround since signature has empty type
-            if(parameter.endsWith(".")) {
+            if (parameter.endsWith(".")) {
                 return parameter.substring(4, parameter.length() - 1);
             }
         }
 
         // #K#C\Class\Foo.property
         // #K#C\Class\Foo.CONST
-        if(parameter.startsWith("#")) {
+        if (parameter.startsWith("#")) {
 
             // get psi element from signature
             Collection<? extends PhpNamedElement> signTypes = phpIndex.getBySignature(parameter, null, 0);
-            if(signTypes.size() == 0) {
+            if (signTypes.size() == 0) {
                 return null;
             }
 
             // get string value
             parameter = PhpElementsUtil.getStringValue(signTypes.iterator().next());
-            if(parameter == null) {
-                return null;
-            }
 
         }
 
@@ -114,24 +111,24 @@ public class PhpTypeProviderUtil {
         result.add(phpNamed);
 
         // invalidate state; we dont know what to do
-        if(!(phpNamed instanceof PhpClass)) {
+        if (!(phpNamed instanceof PhpClass)) {
             result.addAll(phpNamedElements);
             return result;
         }
 
         for (PhpNamedElement phpNamedElement : phpNamedElements) {
-            if(phpNamedElement == null) {
+            if (phpNamedElement == null) {
                 continue;
             }
 
             // nothing found
-            if(!(phpNamedElement instanceof Method)) {
+            if (!(phpNamedElement instanceof Method)) {
                 result.add(phpNamedElement);
                 continue;
             }
 
             // type are equal
-            if(isPhpTypeEqual(phpNamedElement.getType(), (PhpClass) phpNamed)) {
+            if (isPhpTypeEqual(phpNamedElement.getType(), (PhpClass) phpNamed)) {
                 continue;
             }
 
@@ -146,11 +143,11 @@ public class PhpTypeProviderUtil {
         Symfony2InterfacesUtil util = null;
 
         for (String s : phpType.getTypes()) {
-            if(util == null) {
+            if (util == null) {
                 util = new Symfony2InterfacesUtil();
             }
 
-            if(util.isInstanceOf(phpClass, s)) {
+            if (util.isInstanceOf(phpClass, s)) {
                 return true;
             }
         }
@@ -160,7 +157,7 @@ public class PhpTypeProviderUtil {
 
     /**
      * We can have multiple types inside a TypeProvider; split them on "|" so that we dont get empty types
-     *
+     * <p>
      * #M#x#M#C\FooBar.get?doctrine.odm.mongodb.document_manager.getRepository|
      * #M#x#M#C\FooBar.get?doctrine.odm.mongodb.document_manager.getRepository
      */

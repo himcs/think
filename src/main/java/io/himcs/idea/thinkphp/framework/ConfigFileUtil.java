@@ -8,8 +8,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class ConfigFileUtil
-{
+public class ConfigFileUtil {
     private static final Pattern configFilePattern = Pattern.compile(".*/conf/([\\w-/]+).php$");
 
     public static ConfigFileMatchResult matchConfigFile(Project project, VirtualFile virtualFile) {
@@ -20,20 +19,19 @@ public class ConfigFileUtil
 
         // conf/app.php
         // conf/testing/app.php
-        if(m.matches()) {
+        if (m.matches()) {
             return new ConfigFileMatchResult(true, m.group(1).replace('/', '.'));
         } else {
             return ConfigFileMatchResult.NO_MATCH;
         }
     }
 
-    public static class ConfigFileMatchResult
-    {
+    public static class ConfigFileMatchResult {
         static final ConfigFileMatchResult NO_MATCH = new ConfigFileMatchResult(false, "");
 
-        private boolean matches;
+        private final boolean matches;
 
-        private String keyPrefix;
+        private final String keyPrefix;
 
         ConfigFileMatchResult(boolean matches, @NotNull String keyPrefix) {
             this.matches = matches;

@@ -27,7 +27,7 @@ public class PhpElementsUtil {
     static public PhpClass getClassInterface(Project project, @NotNull String className) {
 
         // api workaround for at least interfaces
-        if(!className.startsWith("\\")) {
+        if (!className.startsWith("\\")) {
             className = "\\" + className;
         }
 
@@ -40,9 +40,9 @@ public class PhpElementsUtil {
     static public Method getClassMethod(Project project, String phpClassName, String methodName) {
 
         // we need here an each; because eg Command is non unique because phar file
-        for(PhpClass phpClass: PhpIndex.getInstance(project).getClassesByFQN(phpClassName)) {
+        for (PhpClass phpClass : PhpIndex.getInstance(project).getClassesByFQN(phpClassName)) {
             Method method = getClassMethod(phpClass, methodName);
-            if(method != null) {
+            if (method != null) {
                 return method;
             }
         }
@@ -52,8 +52,8 @@ public class PhpElementsUtil {
 
     @Nullable
     static public Method getClassMethod(PhpClass phpClass, String methodName) {
-        for(Method method: phpClass.getMethods()) {
-            if(method.getName().equals(methodName)) {
+        for (Method method : phpClass.getMethods()) {
+            if (method.getName().equals(methodName)) {
                 return method;
             }
         }
@@ -63,7 +63,7 @@ public class PhpElementsUtil {
     static public Collection<PhpClass> getClassesOrInterfaces(Project project, @NotNull String className) {
 
         // api workaround for at least interfaces
-        if(!className.startsWith("\\")) {
+        if (!className.startsWith("\\")) {
             className = "\\" + className;
         }
 
@@ -79,7 +79,7 @@ public class PhpElementsUtil {
     public static MethodReferenceBag getMethodParameterReferenceBag(PsiElement psiElement, int wantIndex) {
 
         PsiElement variableContext = psiElement.getContext();
-        if(!(variableContext instanceof ParameterList)) {
+        if (!(variableContext instanceof ParameterList)) {
             return null;
         }
 
@@ -89,11 +89,11 @@ public class PhpElementsUtil {
         }
 
         ParameterBag currentIndex = getCurrentParameterIndex(psiElement);
-        if(currentIndex == null) {
+        if (currentIndex == null) {
             return null;
         }
 
-        if(wantIndex >= 0 && currentIndex.getIndex() != wantIndex) {
+        if (wantIndex >= 0 && currentIndex.getIndex() != wantIndex) {
             return null;
         }
 
@@ -104,7 +104,7 @@ public class PhpElementsUtil {
     public static boolean isFunctionReference(PsiElement psiElement, int wantIndex, String... funcName) {
 
         PsiElement variableContext = psiElement.getContext();
-        if(!(variableContext instanceof ParameterList)) {
+        if (!(variableContext instanceof ParameterList)) {
             return false;
         }
 
@@ -117,12 +117,12 @@ public class PhpElementsUtil {
         FunctionReference methodReference = (FunctionReference) context;
         String name = methodReference.getName();
 
-        if(name == null || !Arrays.asList(funcName).contains(name)) {
+        if (name == null || !Arrays.asList(funcName).contains(name)) {
             return false;
         }
 
         ParameterBag currentIndex = getCurrentParameterIndex(psiElement);
-        if(currentIndex == null) {
+        if (currentIndex == null) {
             return false;
         }
 
@@ -148,8 +148,8 @@ public class PhpElementsUtil {
     @Nullable
     public static ParameterBag getCurrentParameterIndex(PsiElement[] parameters, PsiElement parameter) {
         int i;
-        for(i = 0; i < parameters.length; i = i + 1) {
-            if(parameters[i].equals(parameter)) {
+        for (i = 0; i < parameters.length; i = i + 1) {
+            if (parameters[i].equals(parameter)) {
                 return new ParameterBag(i, parameters[i]);
             }
         }
@@ -162,7 +162,7 @@ public class PhpElementsUtil {
 
         // we dont have a parameter on resolved method
         Parameter[] parameters = method.getParameters();
-        if(parameters.length == 0 || parameterIndex >= parameters.length) {
+        if (parameters.length == 0 || parameterIndex >= parameters.length) {
             return null;
         }
 
@@ -180,13 +180,13 @@ public class PhpElementsUtil {
     public static ArrayCreationExpression getCompletableArrayCreationElement(PsiElement psiElement) {
 
         // array('<test>' => '')
-        if(PhpPatterns.psiElement(PhpElementTypes.ARRAY_KEY).accepts(psiElement.getContext())) {
+        if (PhpPatterns.psiElement(PhpElementTypes.ARRAY_KEY).accepts(psiElement.getContext())) {
             PsiElement arrayKey = psiElement.getContext();
-            if(arrayKey != null) {
+            if (arrayKey != null) {
                 PsiElement arrayHashElement = arrayKey.getContext();
-                if(arrayHashElement instanceof ArrayHashElement) {
+                if (arrayHashElement instanceof ArrayHashElement) {
                     PsiElement arrayCreationExpression = arrayHashElement.getContext();
-                    if(arrayCreationExpression instanceof ArrayCreationExpression) {
+                    if (arrayCreationExpression instanceof ArrayCreationExpression) {
                         return (ArrayCreationExpression) arrayCreationExpression;
                     }
                 }
@@ -196,11 +196,11 @@ public class PhpElementsUtil {
 
         // on array creation key dont have value, so provide completion here also
         // array('foo' => 'bar', '<test>')
-        if(PhpPatterns.psiElement(PhpElementTypes.ARRAY_VALUE).accepts(psiElement.getContext())) {
+        if (PhpPatterns.psiElement(PhpElementTypes.ARRAY_VALUE).accepts(psiElement.getContext())) {
             PsiElement arrayKey = psiElement.getContext();
-            if(arrayKey != null) {
+            if (arrayKey != null) {
                 PsiElement arrayCreationExpression = arrayKey.getContext();
-                if(arrayCreationExpression instanceof ArrayCreationExpression) {
+                if (arrayCreationExpression instanceof ArrayCreationExpression) {
                     return (ArrayCreationExpression) arrayCreationExpression;
                 }
 
@@ -219,39 +219,39 @@ public class PhpElementsUtil {
     @Nullable
     private static String getStringValue(@Nullable PsiElement psiElement, int depth) {
 
-        if(psiElement == null || ++depth > 5) {
+        if (psiElement == null || ++depth > 5) {
             return null;
         }
 
-        if(psiElement instanceof StringLiteralExpression) {
+        if (psiElement instanceof StringLiteralExpression) {
             String resolvedString = ((StringLiteralExpression) psiElement).getContents();
-            if(StringUtils.isEmpty(resolvedString)) {
+            if (StringUtils.isEmpty(resolvedString)) {
                 return null;
             }
 
             return resolvedString;
         }
 
-        if(psiElement instanceof Field) {
+        if (psiElement instanceof Field) {
             return getStringValue(((Field) psiElement).getDefaultValue(), depth);
         }
 
-        if(psiElement instanceof PhpReference) {
+        if (psiElement instanceof PhpReference) {
 
             PsiReference psiReference = psiElement.getReference();
-            if(psiReference == null) {
+            if (psiReference == null) {
                 return null;
             }
 
             PsiElement ref = psiReference.resolve();
-            if(ref instanceof PhpReference) {
+            if (ref instanceof PhpReference) {
                 return getStringValue(psiElement, depth);
             }
 
-            if(ref instanceof Field) {
+            if (ref instanceof Field) {
                 PsiElement resolved = ((Field) ref).getDefaultValue();
 
-                if(resolved instanceof StringLiteralExpression) {
+                if (resolved instanceof StringLiteralExpression) {
                     return ((StringLiteralExpression) resolved).getContents();
                 }
             }
@@ -266,10 +266,10 @@ public class PhpElementsUtil {
     @Nullable
     static public PhpPsiElement getArrayValue(ArrayCreationExpression arrayCreationExpression, String name) {
 
-        for(ArrayHashElement arrayHashElement: arrayCreationExpression.getHashElements()) {
+        for (ArrayHashElement arrayHashElement : arrayCreationExpression.getHashElements()) {
             PhpPsiElement child = arrayHashElement.getKey();
-            if(child instanceof StringLiteralExpression) {
-                if(((StringLiteralExpression) child).getContents().equals(name)) {
+            if (child instanceof StringLiteralExpression) {
+                if (((StringLiteralExpression) child).getContents().equals(name)) {
                     return arrayHashElement.getValue();
                 }
             }
@@ -281,11 +281,11 @@ public class PhpElementsUtil {
     @Nullable
     static public String getArrayValueString(ArrayCreationExpression arrayCreationExpression, String name) {
         PhpPsiElement phpPsiElement = getArrayValue(arrayCreationExpression, name);
-        if(phpPsiElement == null) {
+        if (phpPsiElement == null) {
             return null;
         }
 
-        if(phpPsiElement instanceof StringLiteralExpression) {
+        if (phpPsiElement instanceof StringLiteralExpression) {
             return ((StringLiteralExpression) phpPsiElement).getContents();
         }
 
@@ -294,18 +294,18 @@ public class PhpElementsUtil {
 
     /**
      * Gets array key-value as single PsiElement map
-     *
+     * <p>
      * ['foo' => $bar]
      */
     @NotNull
     static public Map<String, PsiElement> getArrayValueMap(@NotNull ArrayCreationExpression arrayCreationExpression) {
         Map<String, PsiElement> keys = new HashMap<String, PsiElement>();
 
-        for(ArrayHashElement arrayHashElement: arrayCreationExpression.getHashElements()) {
+        for (ArrayHashElement arrayHashElement : arrayCreationExpression.getHashElements()) {
             PhpPsiElement child = arrayHashElement.getKey();
-            if(child instanceof StringLiteralExpression) {
+            if (child instanceof StringLiteralExpression) {
                 PhpPsiElement value = arrayHashElement.getValue();
-                if(value != null) {
+                if (value != null) {
                     keys.put(((StringLiteralExpression) child).getContents(), value);
                 }
             }
@@ -317,7 +317,7 @@ public class PhpElementsUtil {
 
     /**
      * Gets string values of array
-     *
+     * <p>
      * ["value", "value2"]
      */
     @NotNull
@@ -327,7 +327,7 @@ public class PhpElementsUtil {
 
     /**
      * Get array string values mapped with their PsiElements
-     *
+     * <p>
      * ["value", "value2"]
      */
     @NotNull
@@ -343,7 +343,7 @@ public class PhpElementsUtil {
         Map<String, PsiElement> keys = new HashMap<String, PsiElement>();
         for (PsiElement child : arrayValues) {
             String stringValue = PhpElementsUtil.getStringValue(child.getFirstChild());
-            if(stringValue != null && StringUtils.isNotBlank(stringValue)) {
+            if (stringValue != null && StringUtils.isNotBlank(stringValue)) {
                 keys.put(stringValue, child);
             }
         }
@@ -358,16 +358,16 @@ public class PhpElementsUtil {
      */
     static public boolean isMethodWithFirstStringOrFieldReference(PsiElement psiElement, String... methodName) {
 
-        if(!PlatformPatterns
-            .psiElement(PhpElementTypes.METHOD_REFERENCE)
-            .withChild(PlatformPatterns
-                    .psiElement(PhpElementTypes.PARAMETER_LIST)
-                    .withFirstChild(PlatformPatterns.or(
-                        PlatformPatterns.psiElement(PhpElementTypes.STRING),
-                        PlatformPatterns.psiElement(PhpElementTypes.FIELD_REFERENCE),
-                        PlatformPatterns.psiElement(PhpElementTypes.CLASS_CONSTANT_REFERENCE)
-                    ))
-            ).accepts(psiElement)) {
+        if (!PlatformPatterns
+                .psiElement(PhpElementTypes.METHOD_REFERENCE)
+                .withChild(PlatformPatterns
+                        .psiElement(PhpElementTypes.PARAMETER_LIST)
+                        .withFirstChild(PlatformPatterns.or(
+                                PlatformPatterns.psiElement(PhpElementTypes.STRING),
+                                PlatformPatterns.psiElement(PhpElementTypes.FIELD_REFERENCE),
+                                PlatformPatterns.psiElement(PhpElementTypes.CLASS_CONSTANT_REFERENCE)
+                        ))
+                ).accepts(psiElement)) {
 
             return false;
         }
@@ -384,7 +384,7 @@ public class PhpElementsUtil {
         final Map<String, String> useImports = new HashMap<>();
 
         PhpPsiElement scope = PhpCodeInsightUtil.findScopeForUseOperator(element);
-        if(scope == null) {
+        if (scope == null) {
             return useImports;
         }
 
@@ -406,7 +406,7 @@ public class PhpElementsUtil {
      * Returns full classname for given element. Example:  use \Illuminate\Support\Facades\Route;
      * For 'Route::group(...' method reference getFullClassName(groupPsiElement, 'Route') will return '\Illuminate\Support\Facades\Route'
      *
-     * @param element Psi element to search imports for
+     * @param element   Psi element to search imports for
      * @param className base class name
      * @return Canonized full class name
      */
@@ -416,7 +416,7 @@ public class PhpElementsUtil {
 
         String fullClassName = useImports.getOrDefault(className, className);
 
-        if(!fullClassName.startsWith("\\")) {
+        if (!fullClassName.startsWith("\\")) {
             return "\\" + fullClassName;
         }
 
@@ -429,9 +429,9 @@ public class PhpElementsUtil {
     @Nullable
     public static String getClassConstantFqn(@NotNull MemberReference value) {
         PhpExpression classReference = value.getClassReference();
-        if(classReference instanceof PhpReference) {
+        if (classReference instanceof PhpReference) {
             String fqn = ((PhpReference) classReference).getFQN();
-            if(StringUtils.isNotBlank(fqn)) {
+            if (StringUtils.isNotBlank(fqn)) {
                 return StringUtils.stripStart(fqn, "\\");
             }
         }

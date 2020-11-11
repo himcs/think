@@ -16,13 +16,13 @@ import javax.swing.*;
 public class ThinkPHPSettingsComponent {
 
     private final JPanel myMainPanel;
-    private JCheckBox enabled = new JBCheckBox("开启TP3 插件?");
     private final JBTextField Theme = new JBTextField();
     private final JBTextField Host = new JBTextField();
     private final JBTextField TplPath = new JBTextField();
     private final JBTextField AppPath = new JBTextField();
     private final JBTextField ConfPath = new JBTextField();
     private final JBTextField DBLinkName = new JBTextField();
+    private final JCheckBox enabled = new JBCheckBox("开启TP3 插件?");
 
 
     public ThinkPHPSettingsComponent() {

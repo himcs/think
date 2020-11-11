@@ -27,42 +27,24 @@ public class ArrayReturnPsiRecursiveVisitor extends PsiRecursiveElementWalkingVi
         this.arrayKeyVisitor = arrayKeyVisitor;
     }
 
-    @Override
-    public void visitElement(PsiElement element) {
-
-        if(element instanceof PhpReturn) {
-            visitPhpReturn((PhpReturn) element);
-        }
-
-        super.visitElement(element);
-    }
-
-    public void visitPhpReturn(PhpReturn phpReturn) {
-        PsiElement arrayCreation = phpReturn.getFirstPsiChild();
-        if(arrayCreation instanceof ArrayCreationExpression) {
-            collectConfigKeys((ArrayCreationExpression) arrayCreation, this.arrayKeyVisitor, fileNameWithoutExtension);
-        }
-    }
-
-
     public static void collectConfigKeys(ArrayCreationExpression creationExpression, ArrayKeyVisitor arrayKeyVisitor, String configName) {
         collectConfigKeys(creationExpression, arrayKeyVisitor, Collections.singletonList(configName));
     }
 
     public static void collectConfigKeys(ArrayCreationExpression creationExpression, ArrayKeyVisitor arrayKeyVisitor, List<String> context) {
 
-        for(ArrayHashElement hashElement: PsiTreeUtil.getChildrenOfTypeAsList(creationExpression, ArrayHashElement.class)) {
+        for (ArrayHashElement hashElement : PsiTreeUtil.getChildrenOfTypeAsList(creationExpression, ArrayHashElement.class)) {
 
             PsiElement arrayKey = hashElement.getKey();
             PsiElement arrayValue = hashElement.getValue();
 
-            if(arrayKey instanceof StringLiteralExpression) {
+            if (arrayKey instanceof StringLiteralExpression) {
 
                 List<String> myContext = new ArrayList<>(context);
                 myContext.add(((StringLiteralExpression) arrayKey).getContents());
                 String keyName = StringUtils.join(myContext, ".");
 
-                if(arrayValue instanceof ArrayCreationExpression) {
+                if (arrayValue instanceof ArrayCreationExpression) {
                     arrayKeyVisitor.visit(keyName, arrayKey, true);
                     collectConfigKeys((ArrayCreationExpression) arrayValue, arrayKeyVisitor, myContext);
                 } else {
@@ -72,5 +54,22 @@ public class ArrayReturnPsiRecursiveVisitor extends PsiRecursiveElementWalkingVi
             }
         }
 
+    }
+
+    @Override
+    public void visitElement(PsiElement element) {
+
+        if (element instanceof PhpReturn) {
+            visitPhpReturn((PhpReturn) element);
+        }
+
+        super.visitElement(element);
+    }
+
+    public void visitPhpReturn(PhpReturn phpReturn) {
+        PsiElement arrayCreation = phpReturn.getFirstPsiChild();
+        if (arrayCreation instanceof ArrayCreationExpression) {
+            collectConfigKeys((ArrayCreationExpression) arrayCreation, this.arrayKeyVisitor, fileNameWithoutExtension);
+        }
     }
 }

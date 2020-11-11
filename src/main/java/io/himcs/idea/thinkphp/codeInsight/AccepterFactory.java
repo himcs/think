@@ -14,10 +14,7 @@ public class AccepterFactory {
                 return false;
             }
             PsiElement parent = psiElement.getParent();
-            if (parent != null && PsiElementUtils.isFunctionReference(parent, functionName, 0)) {
-                return true;
-            }
-            return false;
+            return parent != null && PsiElementUtils.isFunctionReference(parent, functionName, 0);
         };
     }
 }

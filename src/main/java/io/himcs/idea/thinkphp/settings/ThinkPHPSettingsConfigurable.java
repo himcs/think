@@ -11,7 +11,7 @@ import javax.swing.*;
 //Controller
 public class ThinkPHPSettingsConfigurable implements Configurable {
 
-    private Project project;
+    private final Project project;
 
     //View
     private ThinkPHPSettingsComponent mySettingsComponent;

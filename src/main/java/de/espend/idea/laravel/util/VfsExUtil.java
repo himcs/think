@@ -12,7 +12,7 @@ import org.jetbrains.annotations.NotNull;
 public class VfsExUtil {
     public static String getRelativeProjectPath(@NotNull Project project, @NotNull VirtualFile virtualFile) {
         // hacking around project as temp file
-        if(ApplicationManager.getApplication().isUnitTestMode()) {
+        if (ApplicationManager.getApplication().isUnitTestMode()) {
             return virtualFile.getPath();
         }
         return VfsUtil.getRelativePath(virtualFile, project.getBaseDir());
