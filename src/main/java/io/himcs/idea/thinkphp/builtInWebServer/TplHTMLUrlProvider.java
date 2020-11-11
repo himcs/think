@@ -24,7 +24,7 @@ public class TplHTMLUrlProvider extends WebBrowserUrlProvider {
 
         String path = file.getPath();
         ThinkPHPSettingsState settingsState = ThinkPHPSettingsState.getInstance(request.getProject());
-        Pattern pattern = Pattern.compile(".*/" + settingsState.TplPath + "/(\\w+)/" + settingsState.theme + "/(\\w+)/(.*)");
+        Pattern pattern = Pattern.compile(".*/" + settingsState.TplPath + "/(\\w+)/" + settingsState.theme + "/(\\w+)/(\\w)\\.html");
         Matcher matcher = pattern.matcher(path);
         if (matcher.matches()) {
             String group = matcher.group(1);
