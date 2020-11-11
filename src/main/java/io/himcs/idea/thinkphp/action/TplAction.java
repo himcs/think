@@ -4,6 +4,7 @@ import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.editor.Caret;
 import com.intellij.openapi.editor.Editor;
+import com.intellij.openapi.editor.ScrollType;
 import com.intellij.openapi.fileEditor.FileEditorManager;
 import com.intellij.openapi.ide.CopyPasteManager;
 import com.intellij.openapi.project.Project;
@@ -41,13 +42,13 @@ public class TplAction extends AnAction {
             String module = matcher.group(2);
             String action = matcher.group(3);
 
-            VirtualFile virtualFileHTML = LocalFileSystem.getInstance().findFileByPath(
-                    Paths.get(
-                            Objects.requireNonNull(project.getBasePath()),
-                            setting.TplPath, group, setting.theme, module, action + ".html").toString());
-            if (virtualFileHTML != null && virtualFileHTML.exists()) {
-                FileEditorManager.getInstance(project).openFile(virtualFileHTML, false);
-            }
+//            VirtualFile virtualFileHTML = LocalFileSystem.getInstance().findFileByPath(
+//                    Paths.get(
+//                            Objects.requireNonNull(project.getBasePath()),
+//                            setting.TplPath, group, setting.theme, module, action + ".html").toString());
+//            if (virtualFileHTML != null && virtualFileHTML.exists()) {
+//                FileEditorManager.getInstance(project).openFile(virtualFileHTML, false);
+//            }
 
             VirtualFile virtualFileAction = LocalFileSystem.getInstance().findFileByPath(
                     Paths.get(
@@ -73,7 +74,8 @@ public class TplAction extends AnAction {
                 if (offset < 0) {
                     offset = 0;
                 }
-                primaryCaret.moveToOffset(offset,true);
+                primaryCaret.moveToOffset(offset);
+                editor.getScrollingModel().scrollToCaret(ScrollType.MAKE_VISIBLE);
             }
 
         } catch (UnsupportedFlavorException e) {
